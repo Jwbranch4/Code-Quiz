@@ -3,6 +3,14 @@
   justify-content: space-between;
 }
 
+h2 {
+  font-weight: bolder;
+}
+
+#instructions {
+  font-size: larger;
+}
+
 #quiz {
   display: flex;
   flex-flow: column nowrap;
@@ -39,6 +47,11 @@
 #C:hover,
 #D:hover {
   opacity: 0.5;
+}
+
+#response {
+  font-size: x-large;
+  font-weight: bolder;
 }
 
 #start {

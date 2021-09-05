@@ -51,6 +51,8 @@ var answerChoiceA = document.querySelector("#A");
 var answerChoiceB = document.querySelector("#B");
 var answerChoiceC = document.querySelector("#C");
 var answerChoiceD = document.querySelector("#D");
+var response = document.querySelector("#response");
+var answer = "";
 
 function startQuiz() {
   // for loop to go through questions
@@ -58,21 +60,49 @@ function startQuiz() {
     revealAnswers();
 
     question.textContent = questions[i].question;
+    var correctAnswer = questions[i].correctAnswer;
 
     answerChoiceA.textContent = questions[i].choiceA;
     answerChoiceA.addEventListener("click", function () {
+      answer = "A";
       //compare choice with correct answer
+      if (answer === correctAnswer) {
+        response.textContent = "Correct!";
+      } else {
+        response.textContent = "Not correct!";
+      }
       //move loop to next question
     });
 
     answerChoiceB.textContent = questions[i].choiceB;
-    answerChoiceB.addEventListener("click", function () {});
+    answerChoiceB.addEventListener("click", function () {
+      answer = "B";
+      if (answer === correctAnswer) {
+        response.textContent = "Correct!";
+      } else {
+        response.textContent = "Not correct!";
+      }
+    });
 
     answerChoiceC.textContent = questions[i].choiceC;
-    answerChoiceC.addEventListener("click", function () {});
+    answerChoiceC.addEventListener("click", function () {
+      answer = "C";
+      if (answer === correctAnswer) {
+        response.textContent = "Correct!";
+      } else {
+        response.textContent = "Not correct!";
+      }
+    });
 
     answerChoiceD.textContent = questions[i].choiceD;
-    answerChoiceD.addEventListener("click", function () {});
+    answerChoiceD.addEventListener("click", function () {
+      answer = "D";
+      if (answer === correctAnswer) {
+        response.textContent = "Correct!";
+      } else {
+        response.textContent = "Not correct!";
+      }
+    });
   }
 }
 
