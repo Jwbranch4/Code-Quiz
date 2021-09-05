@@ -12,51 +12,54 @@ var questions = [
   },
   {
     question: "The condition in an if/else statement is enclosed within _____",
-    choiceA: "quotes",
-    choiceB: "curly brackets",
-    choiceC: "parentheses",
-    choiceD: "square brackets",
+    choiceA: "1. quotes",
+    choiceB: "2. curly brackets",
+    choiceC: "3. parentheses",
+    choiceD: "4. square brackets",
     correctAnswer: "C",
   },
   {
     question: "Arrays in JavaScript can be used to store ____.",
-    choiceA: "numbers and strings",
-    choiceB: "other arrays",
-    choiceC: "booleans",
-    choiceD: "all of the above",
+    choiceA: "1. numbers and strings",
+    choiceB: "2. other arrays",
+    choiceC: "3. booleans",
+    choiceD: "4. all of the above",
     correctAnswer: "D",
   },
   {
     question:
       "String values must be enclosed within _____ when being assigned to variables",
-    choiceA: "commas",
-    choiceB: "curly brackets",
-    choiceC: "quotes",
-    choiceD: "parentheses",
+    choiceA: "1. commas",
+    choiceB: "2. curly brackets",
+    choiceC: "3. quotes",
+    choiceD: "4. parentheses",
     correctAnswer: "C",
   },
   {
     question:
       "A very useful tool used during development and debugging for printing content to the debugger is.",
-    choiceA: "JavaScript",
-    choiceB: "terminal/bash",
-    choiceC: "for loops",
-    choiceD: "console.log",
+    choiceA: "1. JavaScript",
+    choiceB: "2. terminal/bash",
+    choiceC: "3. for loops",
+    choiceD: "4. console.log",
     correctAnswer: "D",
   },
 ];
 
-var question = document.querySelector("#question");
-question.textContent = questions[0].question;
+// for loop to go through questions
+for (var i = 0; i < questions.length; i++) {
+  var question = document.querySelector("#question");
+  question.textContent = questions[i].question;
 
-var answerChoiceA = document.querySelector("#A");
-answerChoiceA.textContent = questions[0].choiceA;
+  var answerChoiceA = document.querySelector("#A");
+  answerChoiceA.textContent = questions[i].choiceA;
 
-var answerChoiceB = document.querySelector("#B");
-answerChoiceB.textContent = questions[0].choiceB;
+  var answerChoiceB = document.querySelector("#B");
+  answerChoiceB.textContent = questions[i].choiceB;
 
-var answerChoiceC = document.querySelector("#C");
-answerChoiceC.textContent = questions[0].choiceC;
+  var answerChoiceC = document.querySelector("#C");
+  answerChoiceC.textContent = questions[i].choiceC;
 
-var answerChoiceD = document.querySelector("#D");
-answerChoiceD.textContent = questions[0].choiceD;
+  var answerChoiceD = document.querySelector("#D");
+  answerChoiceD.textContent = questions[i].choiceD;
+}
