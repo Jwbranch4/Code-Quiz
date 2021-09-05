@@ -46,20 +46,41 @@ var questions = [
   },
 ];
 
-// for loop to go through questions
-for (var i = 0; i < questions.length; i++) {
-  var question = document.querySelector("#question");
-  question.textContent = questions[i].question;
+function startQuiz() {
+  // for loop to go through questions
+  for (var i = 0; i < questions.length; i++) {
+    var question = document.querySelector("#question");
+    question.textContent = questions[i].question;
 
-  var answerChoiceA = document.querySelector("#A");
-  answerChoiceA.textContent = questions[i].choiceA;
+    var answerChoiceA = document.querySelector("#A");
+    answerChoiceA.textContent = questions[i].choiceA;
+    answerChoiceA.addEventListener("click", function () {
+      //compare choice with correct answer
+      //move loop to next question
+    });
 
-  var answerChoiceB = document.querySelector("#B");
-  answerChoiceB.textContent = questions[i].choiceB;
+    var answerChoiceB = document.querySelector("#B");
+    answerChoiceB.textContent = questions[i].choiceB;
+    answerChoiceB.addEventListener("click", function () {});
 
-  var answerChoiceC = document.querySelector("#C");
-  answerChoiceC.textContent = questions[i].choiceC;
+    var answerChoiceC = document.querySelector("#C");
+    answerChoiceC.textContent = questions[i].choiceC;
+    answerChoiceC.addEventListener("click", function () {});
 
-  var answerChoiceD = document.querySelector("#D");
-  answerChoiceD.textContent = questions[i].choiceD;
+    var answerChoiceD = document.querySelector("#D");
+    answerChoiceD.textContent = questions[i].choiceD;
+    answerChoiceD.addEventListener("click", function () {});
+  }
+}
+
+var startButton = document.querySelector("#start");
+var instructions = document.querySelector("#instructions");
+startButton.addEventListener("click", function () {
+  startQuiz();
+  hideElement();
+});
+
+function hideElement() {
+  startButton.hidden = true;
+  instructions.hidden = true;
 }
