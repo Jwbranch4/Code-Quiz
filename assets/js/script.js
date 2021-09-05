@@ -53,56 +53,75 @@ var answerChoiceC = document.querySelector("#C");
 var answerChoiceD = document.querySelector("#D");
 var response = document.querySelector("#response");
 var answer = "";
+var currentQuestionSet = 0;
 
 function startQuiz() {
   // for loop to go through questions
-  for (var i = 0; i < questions.length; i++) {
+  if (currentQuestionSet < questions.length) {
     revealAnswers();
 
-    question.textContent = questions[i].question;
-    var correctAnswer = questions[i].correctAnswer;
+    question.textContent = questions[currentQuestionSet].question;
+    var correctAnswer = questions[currentQuestionSet].correctAnswer;
 
-    answerChoiceA.textContent = questions[i].choiceA;
+    answerChoiceA.textContent = questions[currentQuestionSet].choiceA;
     answerChoiceA.addEventListener("click", function () {
       answer = "A";
       //compare choice with correct answer
       if (answer === correctAnswer) {
         response.textContent = "Correct!";
+        currentQuestionSet++;
+        startQuiz();
       } else {
         response.textContent = "Not correct!";
+        currentQuestionSet++;
+        startQuiz();
       }
       //move loop to next question
     });
 
-    answerChoiceB.textContent = questions[i].choiceB;
+    answerChoiceB.textContent = questions[currentQuestionSet].choiceB;
     answerChoiceB.addEventListener("click", function () {
       answer = "B";
       if (answer === correctAnswer) {
         response.textContent = "Correct!";
+        currentQuestionSet++;
+        startQuiz();
       } else {
         response.textContent = "Not correct!";
+        currentQuestionSet++;
+        startQuiz();
       }
     });
 
-    answerChoiceC.textContent = questions[i].choiceC;
+    answerChoiceC.textContent = questions[currentQuestionSet].choiceC;
     answerChoiceC.addEventListener("click", function () {
       answer = "C";
       if (answer === correctAnswer) {
         response.textContent = "Correct!";
+        currentQuestionSet++;
+        startQuiz();
       } else {
         response.textContent = "Not correct!";
+        currentQuestionSet++;
+        startQuiz();
       }
     });
 
-    answerChoiceD.textContent = questions[i].choiceD;
+    answerChoiceD.textContent = questions[currentQuestionSet].choiceD;
     answerChoiceD.addEventListener("click", function () {
       answer = "D";
       if (answer === correctAnswer) {
         response.textContent = "Correct!";
+        currentQuestionSet++;
+        startQuiz();
       } else {
         response.textContent = "Not correct!";
+        currentQuestionSet++;
+        startQuiz();
       }
     });
+  } else {
+    endGame();
   }
 }
 
@@ -135,6 +154,13 @@ function revealAnswers() {
   answerChoiceB.hidden = false;
   answerChoiceC.hidden = false;
   answerChoiceD.hidden = false;
+}
+
+function endGame() {
+  //show score
+  hideAnswers();
+  response.hidden = true;
+  question.hidden = true;
 }
 
 hideAnswers();
