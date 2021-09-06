@@ -98,11 +98,11 @@ function revealAnswers() {
 }
 
 // function to create timer for score
-
+var timeInterval = 0;
 var timeLeft = 90;
 function timer() {
   var timeInterval = setInterval(function () {
-    if (timeLeft > 1) {
+    if (timeLeft >= 1 && currentQuestionSet < questions.length - 1) {
       timerEl.textContent = " Time: " + timeLeft;
       timeLeft--;
     } else {
@@ -125,6 +125,7 @@ function checkAnswer(answer) {
     currentQuestionSet++;
     showQuestions();
   } else {
+    clearInterval(timeInterval);
     endGame();
   }
 }
@@ -138,9 +139,10 @@ function endGame() {
   //show score
 
   hideAnswers();
+  clearInterval(timeInterval);
   response.hidden = true;
   question.textContent = " Your score is " + timeLeft;
-  timerEl.hidden = true;
+  //timerEl.hidden = true;
   localStorage.setItem("highScore", timeLeft);
 }
 
