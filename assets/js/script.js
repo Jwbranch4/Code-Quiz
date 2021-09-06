@@ -57,6 +57,7 @@ var answer = "";
 var currentQuestionSet = 0;
 var timerEl = document.querySelector("#timer");
 var highScores = document.querySelector("#highScore");
+var prompt = document.querySelector("#prompt");
 
 //start button function should start quiz and timer for score
 var startButton = document.querySelector("#start");
@@ -125,7 +126,6 @@ function checkAnswer(answer) {
     currentQuestionSet++;
     showQuestions();
   } else {
-    clearInterval(timeInterval);
     endGame();
   }
 }
@@ -133,6 +133,19 @@ function checkAnswer(answer) {
 function startQuiz() {
   revealAnswers();
   showQuestions();
+}
+function highScorePrompt() {
+  question.textContent =
+    "Please enter your initials for High Score Leader Board";
+  var input = document.createElement("input"); //<input type="text" id="initials" placeholder="initials" />
+  var button = document.createElement("button"); // <button id="submit">Submit</button>
+  input.setAttribute("type", "text");
+  input.setAttribute("id", "initials");
+  input.setAttribute("placeholder", "initials");
+  button.setAttribute("id", "submit");
+  button.textContent = "Submit";
+  prompt.appendChild(input);
+  prompt.appendChild(button);
 }
 
 function endGame() {
@@ -142,8 +155,10 @@ function endGame() {
   clearInterval(timeInterval);
   response.hidden = true;
   question.textContent = " Your score is " + timeLeft;
-  //timerEl.hidden = true;
-  localStorage.setItem("highScore", timeLeft);
+  timerEl.hidden = true;
+  //set local storage function
+  // display local storage high scores
+  highScorePrompt();
 }
 
 answerChoiceA.addEventListener("click", function () {
