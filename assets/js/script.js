@@ -46,6 +46,7 @@ var questions = [
   },
 ];
 
+// list of global variables needed
 var question = document.querySelector("#question");
 var answerChoiceA = document.querySelector("#A");
 var answerChoiceB = document.querySelector("#B");
@@ -54,92 +55,32 @@ var answerChoiceD = document.querySelector("#D");
 var response = document.querySelector("#response");
 var answer = "";
 var currentQuestionSet = 0;
+var timerEl = document.querySelector("#timer");
+var highScores = document.querySelector("#highScore");
 
-function startQuiz() {
-  // for loop to go through questions
-  if (currentQuestionSet < questions.length) {
-    revealAnswers();
-
-    question.textContent = questions[currentQuestionSet].question;
-    var correctAnswer = questions[currentQuestionSet].correctAnswer;
-
-    answerChoiceA.textContent = questions[currentQuestionSet].choiceA;
-    answerChoiceA.addEventListener("click", function () {
-      answer = "A";
-      //compare choice with correct answer
-      if (answer === correctAnswer) {
-        response.textContent = "Correct!";
-        currentQuestionSet++;
-        startQuiz();
-      } else {
-        response.textContent = "Not correct!";
-        currentQuestionSet++;
-        startQuiz();
-      }
-      //move loop to next question
-    });
-
-    answerChoiceB.textContent = questions[currentQuestionSet].choiceB;
-    answerChoiceB.addEventListener("click", function () {
-      answer = "B";
-      if (answer === correctAnswer) {
-        response.textContent = "Correct!";
-        currentQuestionSet++;
-        startQuiz();
-      } else {
-        response.textContent = "Not correct!";
-        currentQuestionSet++;
-        startQuiz();
-      }
-    });
-
-    answerChoiceC.textContent = questions[currentQuestionSet].choiceC;
-    answerChoiceC.addEventListener("click", function () {
-      answer = "C";
-      if (answer === correctAnswer) {
-        response.textContent = "Correct!";
-        currentQuestionSet++;
-        startQuiz();
-      } else {
-        response.textContent = "Not correct!";
-        currentQuestionSet++;
-        startQuiz();
-      }
-    });
-
-    answerChoiceD.textContent = questions[currentQuestionSet].choiceD;
-    answerChoiceD.addEventListener("click", function () {
-      answer = "D";
-      if (answer === correctAnswer) {
-        response.textContent = "Correct!";
-        currentQuestionSet++;
-        startQuiz();
-      } else {
-        response.textContent = "Not correct!";
-        currentQuestionSet++;
-        startQuiz();
-      }
-    });
-  } else {
-    endGame();
-  }
-}
-
+//start button function should start quiz and timer for score
 var startButton = document.querySelector("#start");
 var instructions = document.querySelector("#instructions");
+
 startButton.addEventListener("click", function () {
   startQuiz();
+  timer();
   hideElement();
 });
+
+// function to show question and answers
+
+function showQuestions() {
+  question.textContent = questions[currentQuestionSet].question;
+  answerChoiceA.textContent = questions[currentQuestionSet].choiceA;
+  answerChoiceB.textContent = questions[currentQuestionSet].choiceB;
+  answerChoiceC.textContent = questions[currentQuestionSet].choiceC;
+  answerChoiceD.textContent = questions[currentQuestionSet].choiceD;
+}
 
 function hideElement() {
   startButton.hidden = true;
   instructions.hidden = true;
-}
-
-function revealElement() {
-  startButton.hidden = false;
-  instructions.hidden = false;
 }
 
 function hideAnswers() {
@@ -156,11 +97,73 @@ function revealAnswers() {
   answerChoiceD.hidden = false;
 }
 
+// function to create timer for score
+
+var timeLeft = 90;
+function timer() {
+  var timeInterval = setInterval(function () {
+    if (timeLeft > 1) {
+      timerEl.textContent = " Time: " + timeLeft;
+      timeLeft--;
+    } else {
+      clearInterval(timeInterval);
+      endGame();
+    }
+  }, 1000);
+}
+
+function checkAnswer(answer) {
+  var correctAnswer = questions[currentQuestionSet].correctAnswer;
+  if (answer === correctAnswer) {
+    response.textContent = "Correct!";
+  } else {
+    response.textContent = "Not correct!";
+    timeLeft = timeLeft - 10;
+  }
+
+  if (currentQuestionSet < questions.length - 1) {
+    currentQuestionSet++;
+    showQuestions();
+  } else {
+    endGame();
+  }
+}
+
+function startQuiz() {
+  revealAnswers();
+  showQuestions();
+}
+
 function endGame() {
   //show score
+
   hideAnswers();
   response.hidden = true;
-  question.hidden = true;
+  question.textContent = " Your score is " + timeLeft;
+  timerEl.hidden = true;
+  localStorage.setItem("highScore", timeLeft);
 }
+
+answerChoiceA.addEventListener("click", function () {
+  answer = "A";
+  checkAnswer(answer);
+});
+
+answerChoiceB.addEventListener("click", function () {
+  answer = "B";
+  checkAnswer(answer);
+});
+
+answerChoiceC.addEventListener("click", function () {
+  answer = "C";
+  checkAnswer(answer);
+});
+
+answerChoiceD.addEventListener("click", function () {
+  answer = "D";
+  checkAnswer(answer);
+});
+
+// function to check answer to correct answer
 
 hideAnswers();
