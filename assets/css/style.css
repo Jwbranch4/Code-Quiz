@@ -54,7 +54,8 @@ h2 {
   font-weight: bolder;
 }
 
-#prompt {
+#prompt,
+#highScores {
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;

@@ -84,6 +84,11 @@ function hideElement() {
   instructions.hidden = true;
 }
 
+function revealElement() {
+  startButton.hidden = false;
+  instructions.hidden = false;
+}
+
 function hideAnswers() {
   answerChoiceA.hidden = true;
   answerChoiceB.hidden = true;
@@ -137,8 +142,11 @@ function startQuiz() {
 function highScorePrompt() {
   question.textContent =
     "Please enter your initials for High Score Leader Board";
-  var input = document.createElement("input"); //<input type="text" id="initials" placeholder="initials" />
-  var button = document.createElement("button"); // <button id="submit">Submit</button>
+  var input = document.createElement("input");
+  var button = document.createElement("button");
+  var startButton = document.createElement("button");
+  startButton.setAttribute("id", "start");
+  startButton.textContent = "Start";
   input.setAttribute("type", "text");
   input.setAttribute("id", "initials");
   input.setAttribute("placeholder", "initials");
@@ -146,6 +154,28 @@ function highScorePrompt() {
   button.textContent = "Submit";
   prompt.appendChild(input);
   prompt.appendChild(button);
+  button.addEventListener("click", function (event) {
+    var initials = document.querySelector("#initials").value;
+    localStorage.setItem("initials", initials);
+    localStorage.setItem("score", timeLeft);
+    input.hidden = true;
+    button.hidden = true;
+    question.textContent = "Coding Quiz Challenge";
+    response.appendChild(startButton);
+  });
+}
+
+startButton.addEventListener("click", function (event) {
+  showHighScores();
+});
+
+function showHighScores() {
+  var int = localStorage.getItem("initials");
+  var scr = localStorage.getItem("score");
+  var display = document.createElement("div");
+  display.setAttribute("id", "highScores");
+  quiz.appendChild(display);
+  display.textContent = int + " " + scr;
 }
 
 function endGame() {
